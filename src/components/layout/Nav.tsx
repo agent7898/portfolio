@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { scrollToSection } from "@/lib/lenis";
 import { EASE_OUT } from "@/lib/timing";
@@ -47,8 +48,18 @@ export default function Nav() {
           onClick={(e) => go(e, "#top")}
           className="group flex items-center gap-3"
           data-cursor="hover"
+          aria-label="Back to top"
         >
-          <span className="h-1.5 w-1.5 rounded-full bg-white shadow-[0_0_10px_2px_rgba(255,255,255,0.5)]" />
+          <span className="relative block h-8 w-8 overflow-hidden rounded-full ring-1 ring-white/15 transition-all duration-500 group-hover:ring-white/40 group-hover:shadow-[0_0_16px_rgba(255,255,255,0.25)]">
+            <Image
+              src="/silver-surfer.webp"
+              alt=""
+              fill
+              sizes="32px"
+              priority
+              className="object-cover"
+            />
+          </span>
           <span className="font-display text-sm tracking-[0.2em] text-white/90 transition-colors group-hover:text-white">
             GCLC
           </span>

@@ -63,6 +63,8 @@ Reduced motion is honoured in four places, and new motion should follow suit: `u
 
 Path alias: `@/*` → `./src/*`.
 
+**Branding assets** all derive from one Silver Surfer image (the brief's own reference point). `public/silver-surfer.webp` is the nav mark; `src/app/{favicon.ico,icon.png,apple-icon.png}` are the browser icons. Two things to preserve if you regenerate them: Next's icon file convention accepts `.ico/.jpg/.jpeg/.png/.svg` but **not** webp, and the source art is a small figure on a wide starfield — it is cropped tight to the figure, without which it is an unreadable dark square at 16px.
+
 ## Design constraints
 
 [design/](design/) is a written brief that governs visual work; read it before changing anything visual. Hard rules: pure black background, silver/chrome/white with occasional blue reflections, tiny white stars only (no nebula, galaxy, or coloured planets), slow elegant motion — nothing bouncy. Ruled out: bright gradients, neon/cyberpunk, glass everywhere, heavy blur.
