@@ -1,0 +1,34 @@
+# Netlify build configuration.
+#
+# Committing this file means a fresh Netlify site needs no dashboard setup:
+# import the repo, click Deploy. Everything below is what Netlify would
+# otherwise ask for in the UI.
+
+[build]
+  command = "npm run build"
+  # The Next.js Runtime reads the build output from here and turns the
+  # server-rendered routes into Netlify functions. Do not point this at
+  # `out/` — this site is not a static export.
+  publish = ".next"
+
+[build.environment]
+  # Next.js 16 requires Node >= 20.9.
+  NODE_VERSION = "22"
+
+# Netlify auto-detects Next.js and installs this plugin, but pinning it here
+# keeps the behaviour explicit and identical across CLI and CI deploys.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "SAMEORIGIN"
+
+# The résumé is a stable asset — let the CDN and browsers hold on to it.
+[[headers]]
+  for = "/GC_Likith_Chowdary_Resume.pdf"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"
