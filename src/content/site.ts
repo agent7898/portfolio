@@ -130,11 +130,8 @@ export const marqueeItems = [
   "Java",
   "JavaScript",
   "R",
-  "React",
   "FastAPI",
   "Supabase",
-  "TensorFlow",
-  "OpenCV",
   "Machine Learning",
   "Linux",
 ];

@@ -36,7 +36,9 @@ export default function About() {
       </div>
 
       <motion.div {...band} className="mt-24 border-y border-white/[0.06] md:mt-36">
-        <Marquee items={marqueeItems} duration={55} />
+        {/* 80s keeps the band at its previous ~36px/s — the track got longer
+            when Marquee went to four copies, and duration is per full cycle. */}
+        <Marquee items={marqueeItems} duration={80} />
       </motion.div>
     </section>
   );
