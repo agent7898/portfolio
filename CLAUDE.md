@@ -79,7 +79,7 @@ The brief lists Space Grotesk / Inter / Satoshi; the build pairs Space Grotesk a
 
 ## Known gaps
 
-- [ContactForm.tsx](src/components/ui/ContactForm.tsx) fakes submission with a `setTimeout` — there is no backend. Fields are controlled and named so swapping in an endpoint is small. The Contact section shows the email address directly so there is always a working path.
+- [ContactForm.tsx](src/components/ui/ContactForm.tsx) posts to Netlify Forms. Netlify parses *static* HTML at deploy time to find forms, which never sees a React client component — so `public/__forms.html` declares the form and the component POSTs urlencoded data to `/__forms.html`. Field names must match across the two files. Submission fails under `npm run dev` (no Netlify runtime); the error state falls back to the email address, as does the Contact section itself.
 - `package.json` still carries the scaffold name `temp-app`.
 - GSAP is a dependency but nothing imports it.
 

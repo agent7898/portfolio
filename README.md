@@ -98,6 +98,22 @@ netlify deploy --build --prod # promote to production
 
 `netlify init` will offer to wire up continuous deployment from GitHub; accept it and pushes deploy automatically from then on.
 
+### Contact form (Netlify Forms)
+
+The contact form posts to **Netlify Forms** — no backend, no API route, no third-party service.
+
+Netlify detects forms by parsing *static* HTML at deploy time, and the real form is a React client component rendered by JavaScript, which that parser never sees. So [public/__forms.html](public/__forms.html) declares the form and its field names, and [ContactForm.tsx](src/components/ui/ContactForm.tsx) POSTs urlencoded data to `/__forms.html`. **Field names must stay in sync between the two files** — Netlify ignores fields it wasn't told about.
+
+One-time setup after the first deploy:
+
+1. **Site configuration → Forms → Enable form detection.**
+2. Redeploy (**Deploys → Trigger deploy → Deploy site**) so the parser runs over the HTML.
+3. Submissions land under **Forms → contact**. Add an email alert under **Forms → Form notifications**, otherwise you have to check the dashboard.
+
+A `bot-field` honeypot is wired up on both forms; Netlify silently discards anything that fills it. The free tier allows 100 submissions/month.
+
+Submitting only works on a deployed site or under `netlify dev` — in plain `npm run dev` the POST fails and the form falls back to showing the email address.
+
 ### Custom domain
 
 **Site configuration → Domain management → Add a domain**. Netlify provisions the Let's Encrypt certificate automatically once DNS resolves — either point your registrar's nameservers at Netlify DNS, or add the `CNAME`/`A` records Netlify shows you.
@@ -119,7 +135,6 @@ netlify deploy --build --prod # promote to production
 
 ## Known gaps
 
-- [ContactForm.tsx](src/components/ui/ContactForm.tsx) fakes submission with a `setTimeout` — there is no backend. Fields are controlled and named so an endpoint (e.g. Netlify Forms or a function) drops in easily. The Contact section shows the email address directly, so there is always a working path.
 - `package.json` still carries the scaffold name `temp-app`.
 - GSAP is a dependency but nothing imports it.
 

@@ -3,28 +3,56 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import MagneticButton from "./MagneticButton";
+import { profile } from "@/content/site";
 import { EASE_OUT } from "@/lib/timing";
 
-type Status = "idle" | "sending" | "sent";
+type Status = "idle" | "sending" | "sent" | "error";
 
 const FIELDS = [
   { id: "name", label: "Name", type: "text", placeholder: "Your name" },
   { id: "email", label: "Email", type: "email", placeholder: "you@company.com" },
 ] as const;
 
+/** Must match the `name` on the static form in public/__forms.html. */
+const FORM_NAME = "contact";
+
+/**
+ * Netlify detects forms by parsing static HTML at deploy time, which never
+ * sees this component. public/__forms.html declares the form instead, and
+ * submissions are posted to it as urlencoded data.
+ */
+const FORM_ENDPOINT = "/__forms.html";
+
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [values, setValues] = useState({ name: "", email: "", message: "" });
+  // Honeypot: bots fill every field they find, humans never see this one.
+  const [botField, setBotField] = useState("");
 
   const set = (key: keyof typeof values) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setValues((v) => ({ ...v, [key]: e.target.value }));
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("sending");
-    // NOTE: still simulated — there is no backend wired up yet. The fields are
-    // controlled and named so swapping this for a real endpoint is a one-liner.
-    setTimeout(() => setStatus("sent"), 1400);
+
+    try {
+      const response = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          "form-name": FORM_NAME,
+          "bot-field": botField,
+          ...values,
+        }).toString(),
+      });
+
+      if (!response.ok) throw new Error(`Netlify forms responded ${response.status}`);
+      setStatus("sent");
+    } catch {
+      // No silent failure — the error state offers the mailto fallback.
+      setStatus("error");
+    }
   };
 
   return (
@@ -54,12 +82,34 @@ export default function ContactForm() {
           ) : (
             <motion.form
               key="form"
+              name={FORM_NAME}
+              method="POST"
+              action={FORM_ENDPOINT}
+              data-netlify="true"
+              data-netlify-honeypot="bot-field"
               onSubmit={handleSubmit}
               initial={{ opacity: 1 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.4 }}
               className="flex flex-col gap-8"
             >
+              <input type="hidden" name="form-name" value={FORM_NAME} />
+
+              {/* Honeypot — hidden from people and assistive tech, not from bots. */}
+              <p className="hidden" aria-hidden>
+                <label>
+                  Leave this field empty
+                  <input
+                    type="text"
+                    name="bot-field"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={botField}
+                    onChange={(e) => setBotField(e.target.value)}
+                  />
+                </label>
+              </p>
+
               {FIELDS.map((field) => (
                 <Field
                   key={field.id}
@@ -96,6 +146,20 @@ export default function ContactForm() {
                   →
                 </span>
               </MagneticButton>
+
+              {status === "error" && (
+                <p role="status" className="text-sm font-light text-chrome-400">
+                  That didn&apos;t send. Try again, or reach me directly at{" "}
+                  <a
+                    href={`mailto:${profile.email}`}
+                    data-cursor="hover"
+                    className="text-white underline underline-offset-4"
+                  >
+                    {profile.email}
+                  </a>
+                  .
+                </p>
+              )}
             </motion.form>
           )}
         </AnimatePresence>

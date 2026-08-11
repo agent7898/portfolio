@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Netlify form definitions</title>
+    <meta name="robots" content="noindex" />
+  </head>
+  <body>
+    <!--
+      This file exists only so Netlify can find the form.
+
+      Netlify's form detection parses static HTML at deploy time. The real
+      contact form is a React client component (src/components/ui/ContactForm.tsx),
+      which is rendered by JavaScript and so is invisible to that parser. This
+      static declaration registers the form and its field names; the React form
+      POSTs urlencoded data to /__forms.html, and Netlify records the submission.
+
+      Field names here must stay in sync with ContactForm.tsx.
+    -->
+    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="contact" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <textarea name="message"></textarea>
+      <input type="text" name="bot-field" />
+    </form>
+  </body>
+</html>
