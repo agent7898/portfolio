@@ -56,7 +56,7 @@ export const education: Education[] = [
     qualification: "Pre-University, Karnataka State Board",
     institution: "Narayana PU College",
     period: "2020 — 2022",
-    detail: "91.6%",
+    detail: "91.83%",
   },
 ];
 
