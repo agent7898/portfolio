@@ -56,7 +56,7 @@ export const education: Education[] = [
     qualification: "Pre-University, Karnataka State Board",
     institution: "Narayana PU College",
     period: "2020 — 2022",
-    detail: "93%",
+    detail: "91.6%",
   },
 ];
 
@@ -79,12 +79,12 @@ export const projects: Project[] = [
     summary:
       "A method-driven medical and technical platform built around four pillars — a diagnostic knowledge channel, an algorithmic reasoning engine, a signal-tools R&D hub, and a structured mentorship program.",
     contributions: [
-      "Architected the React + Vite frontend and integrated Supabase for auth, storage, and row-level security",
+      "Secured the OpenAI API key within server-side Supabase Edge Functions with 256 kB payload caps and automated offline fallback",
       "Built a country-first, three-tier clinician verification flow gating the reviews workspace",
-      "Designed the differential case pipeline: clinician intake → AI formatting → admin diagnosis → standardised report",
+      "Engineered a rule-based diagnostic reasoning engine across 25 clinical pathways with negation parsing and automated red-flag triage",
       "Shipped a dual-provider auth system (Google OAuth + passwordless email OTP) resolving to one account",
     ],
-    stack: ["React", "Vite", "Supabase", "JavaScript"],
+    stack: ["Supabase", "OpenAI API", "Edge Functions", "JavaScript"],
   },
   {
     index: "02",
@@ -105,7 +105,7 @@ export const projects: Project[] = [
 
 export const stack = {
   Languages: ["C", "C++", "Java", "Python", "JavaScript", "R"],
-  "Web & Frontend": ["React", "Vite", "FastAPI", "Supabase"],
+  "Web & Backend": ["FastAPI", "Supabase", "PostgreSQL", "Edge Functions"],
   "Machine Learning": [
     "TensorFlow",
     "OpenCV",
