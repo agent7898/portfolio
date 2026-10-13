@@ -20,11 +20,11 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: "GC Likith Chowdary — Software Engineer",
   description:
-    "Portfolio of GC Likith Chowdary — software engineer and Computer Science Engineering student working across software development and machine learning.",
+    "Portfolio of GC Likith Chowdary — software engineer and Computer Science Engineering student focused on back-end development and REST APIs.",
   openGraph: {
     title: "GC Likith Chowdary — Software Engineer",
     description:
-      "Software engineer working across software development and machine learning.",
+      "Software engineer focused on back-end development and REST APIs.",
     type: "website",
   },
 };

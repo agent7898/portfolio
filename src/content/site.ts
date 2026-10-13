@@ -10,7 +10,6 @@ export const profile = {
   name: "GC Likith Chowdary",
   role: "Software Engineer",
   location: "Bengaluru, Karnataka, India",
-  email: "gclikith@gmail.com",
   resume: "/GC_Likith_Chowdary_Resume.pdf",
   github: "https://github.com/agent7898",
   linkedin: "https://www.linkedin.com/in/gc-likith-chowdary/",
@@ -18,10 +17,10 @@ export const profile = {
 
 export const about = {
   lead: "I build software that holds up.",
-  body: "I am a Computer Science Engineering student with strong fundamentals in problem-solving and core CS, and a growing focus on software development and machine learning. I work across C, C++, Python, Java and R, and I care about the details most people only notice when they are missing.",
+  body: "I am a Computer Science Engineering student and Software Engineer Intern focused on back-end development and REST API design. I build mainly in Java and Python, with C, C++ and JavaScript alongside, and I use Claude Code for AI-assisted rapid development — on the Bynaptic Connections client website and on Amplyt, my major project. I care about the details most people only notice when they are missing.",
   stats: [
     { value: "9.06", label: "CGPA / 10" },
-    { value: "6", label: "Languages" },
+    { value: "5", label: "Languages" },
     { value: "2", label: "Projects" },
   ],
 } as const;
@@ -73,6 +72,21 @@ export type Project = {
 export const projects: Project[] = [
   {
     index: "01",
+    title: "Amplyt",
+    role: "Backend Developer",
+    status: "Major Project",
+    summary:
+      "An EV charging trip planner for highway drivers — it routes a journey such as Bengaluru → Mysuru, finds reachable, compatible chargers along the route and ranks each stop by expected wait, detour and charging speed.",
+    contributions: [
+      "Built a layered FastAPI backend — routers, services and repositories over a SQLAlchemy ORM — documented through Swagger/OpenAPI",
+      "Managed schema changes with Alembic migrations and secured accounts with JWT-based authentication",
+      "Integrated a self-hosted OSRM routing engine and containerised the services with Docker Compose",
+      "Covered the API, auth and routing with a pytest suite, using Claude Code for AI-assisted rapid development",
+    ],
+    stack: ["Python", "FastAPI", "SQLAlchemy", "Alembic", "JWT", "Docker", "OSRM"],
+  },
+  {
+    index: "02",
     title: "Bynaptic Connections",
     role: "Freelance Website Developer",
     status: "Ongoing",
@@ -84,54 +98,50 @@ export const projects: Project[] = [
       "Engineered a rule-based diagnostic reasoning engine across 25 clinical pathways with negation parsing and automated red-flag triage",
       "Shipped a dual-provider auth system (Google OAuth + passwordless email OTP) resolving to one account",
     ],
-    stack: ["Supabase", "OpenAI API", "Edge Functions", "JavaScript"],
-  },
-  {
-    index: "02",
-    title: "FER Local",
-    role: "Mini Project",
-    status: "Prototype",
-    summary:
-      "A local, webcam-based facial emotion recognition prototype with an explainability overlay — it predicts an emotion and returns a Grad-CAM heatmap rendered over the detected face.",
-    contributions: [
-      "Built the emotion recognition model on MobileNetV2, tuned to run on edge devices",
-      "Engineered the FastAPI service handling real-time inference and model hot-reload",
-      "Implemented face detection and cropping with an OpenCV Haar cascade",
-      "Generated Grad-CAM heatmaps to make predictions inspectable rather than opaque",
-    ],
-    stack: ["Python", "FastAPI", "TensorFlow", "MobileNetV2", "OpenCV", "Grad-CAM"],
+    stack: ["Supabase", "OpenAI API", "Edge Functions", "JavaScript", "Claude Code"],
   },
 ];
 
 export const stack = {
-  Languages: ["C", "C++", "Java", "Python", "JavaScript", "R"],
-  "Web & Backend": ["FastAPI", "Supabase", "PostgreSQL", "Edge Functions"],
-  "Machine Learning": [
-    "TensorFlow",
-    "OpenCV",
-    "MobileNetV2",
-    "Grad-CAM",
-    "Model training workflows",
+  Languages: ["Java", "Python", "C", "C++", "JavaScript"],
+  "Backend & APIs": [
+    "FastAPI",
+    "REST APIs",
+    "SQLAlchemy",
+    "Alembic",
+    "JWT Authentication",
+    "Swagger / OpenAPI",
+    "Supabase",
+    "PostgreSQL",
   ],
-  "Tools & Practice": [
+  "Tools & Platforms": [
     "Git & GitHub",
+    "Docker & Docker Compose",
     "Linux / Command Line",
-    "Jupyter Notebook",
+    "pytest",
     "VS Code",
     "Eclipse IDE",
+    "Claude Code",
+  ],
+  "Core Concepts": [
+    "Data Structures & Algorithms",
     "Object-Oriented Programming",
+    "DBMS",
+    "Operating Systems",
+    "Computer Networks",
   ],
 } as const;
 
 /** Flat list for the marquee band. */
 export const marqueeItems = [
-  "C / C++",
-  "Python",
   "Java",
+  "Python",
+  "C / C++",
   "JavaScript",
-  "R",
   "FastAPI",
+  "SQLAlchemy",
+  "Docker",
   "Supabase",
-  "Machine Learning",
+  "Claude Code",
   "Linux",
 ];

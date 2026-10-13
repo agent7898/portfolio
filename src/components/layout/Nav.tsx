@@ -7,6 +7,7 @@ import { scrollToSection } from "@/lib/lenis";
 import { EASE_OUT } from "@/lib/timing";
 import { useAppReady } from "./Preloader";
 import { cn } from "@/lib/cn";
+import { profile } from "@/content/site";
 
 const LINKS = [
   { label: "Index", href: "#about" },
@@ -85,7 +86,7 @@ export default function Nav() {
         </ul>
 
         <a
-          href="/GC_Likith_Chowdary_Resume.pdf"
+          href={profile.resume}
           target="_blank"
           rel="noopener noreferrer"
           data-cursor="hover"

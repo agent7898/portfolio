@@ -112,7 +112,7 @@ One-time setup after the first deploy:
 
 A `bot-field` honeypot is wired up on both forms; Netlify silently discards anything that fills it. The free tier allows 100 submissions/month.
 
-Submitting only works on a deployed site or under `netlify dev` — in plain `npm run dev` the POST fails and the form falls back to showing the email address.
+Submitting only works on a deployed site or under `netlify dev` — in plain `npm run dev` the POST fails and the form falls back to a LinkedIn link.
 
 ### Custom domain
 

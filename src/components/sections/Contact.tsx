@@ -21,17 +21,19 @@ export default function Contact() {
 
         <div className="mt-16 grid gap-14 md:mt-24 md:grid-cols-[1fr_1.1fr] md:gap-24">
           <motion.div {...details} className="flex flex-col gap-10">
-            {/* A direct mail link, so there is always a path that does not
-                depend on the form's backend. */}
+            {/* A direct LinkedIn link, so there is always a path that does not
+                depend on the form's backend. No email is published on the site. */}
             <div>
               <p className="eyebrow mb-4">Direct</p>
               <a
-                href={`mailto:${profile.email}`}
+                href={profile.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
                 data-cursor="hover"
                 className="group inline-flex items-baseline gap-3 font-serif text-2xl text-white transition-colors md:text-3xl"
               >
                 <span className="bg-gradient-to-r from-white to-white bg-[length:0%_1px] bg-left-bottom bg-no-repeat transition-[background-size] duration-700 group-hover:bg-[length:100%_1px]">
-                  {profile.email}
+                  Message me on LinkedIn
                 </span>
               </a>
             </div>

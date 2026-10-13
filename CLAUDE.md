@@ -29,7 +29,7 @@ A single-page portfolio for GC Likith Chowdary. Next.js 16 App Router + React 19
 
 **Content is data, not markup.** All copy lives in [src/content/site.ts](src/content/site.ts) — profile, about, education, projects, stack, marquee. Sections import from it and render. Editing the portfolio's text should never mean touching layout or motion code.
 
-Everything in that file is sourced from the résumé in `public/` and the project READMEs in [content/projects.md](content/projects.md). **Do not add technologies that do not appear in one of those two places** — the owner has explicitly asked for this. Note the projects are deliberately *not* described uniformly: Bynaptic Connections is `Ongoing`, FER Local is a `Prototype`, and the Work heading avoids claiming both are shipped.
+Everything in that file is sourced from the résumé in `public/` and the project READMEs in [content/projects.md](content/projects.md). **Do not add technologies that do not appear in one of those two places** — the owner has explicitly asked for this. Amplyt (the major project) leads the Work section and is described from the backend only — the owner asked that its ML side not be featured, and there is no ML anywhere on the site. Bynaptic Connections is `Ongoing`, and the Work heading avoids claiming both are shipped.
 
 **Page composition.** [page.tsx](src/app/page.tsx) is a thin shell: `<Scene />` plus six sections from [src/components/sections/](src/components/sections/). Section indices (`01`–`05`) and the [Nav](src/components/layout/Nav.tsx) link list are maintained by hand — adding a section means renumbering both.
 
@@ -79,7 +79,7 @@ The brief lists Space Grotesk / Inter / Satoshi; the build pairs Space Grotesk a
 
 ## Known gaps
 
-- [ContactForm.tsx](src/components/ui/ContactForm.tsx) posts to Netlify Forms. Netlify parses *static* HTML at deploy time to find forms, which never sees a React client component — so `public/__forms.html` declares the form and the component POSTs urlencoded data to `/__forms.html`. Field names must match across the two files. Submission fails under `npm run dev` (no Netlify runtime); the error state falls back to the email address, as does the Contact section itself.
+- [ContactForm.tsx](src/components/ui/ContactForm.tsx) posts to Netlify Forms. Netlify parses *static* HTML at deploy time to find forms, which never sees a React client component — so `public/__forms.html` declares the form and the component POSTs urlencoded data to `/__forms.html`. Field names must match across the two files. Submission fails under `npm run dev` (no Netlify runtime); the error state falls back to a LinkedIn link, as does the Contact section itself. **No email address or phone number is published anywhere on the site** — the owner asked for this; keep it that way, including in the résumé PDF.
 - `package.json` still carries the scaffold name `temp-app`.
 - GSAP is a dependency but nothing imports it.
 

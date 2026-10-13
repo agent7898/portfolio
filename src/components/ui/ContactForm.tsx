@@ -50,7 +50,7 @@ export default function ContactForm() {
       if (!response.ok) throw new Error(`Netlify forms responded ${response.status}`);
       setStatus("sent");
     } catch {
-      // No silent failure — the error state offers the mailto fallback.
+      // No silent failure — the error state offers the LinkedIn fallback.
       setStatus("error");
     }
   };
@@ -149,13 +149,15 @@ export default function ContactForm() {
 
               {status === "error" && (
                 <p role="status" className="text-sm font-light text-chrome-400">
-                  That didn&apos;t send. Try again, or reach me directly at{" "}
+                  That didn&apos;t send. Try again, or{" "}
                   <a
-                    href={`mailto:${profile.email}`}
+                    href={profile.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     data-cursor="hover"
                     className="text-white underline underline-offset-4"
                   >
-                    {profile.email}
+                    message me on LinkedIn
                   </a>
                   .
                 </p>

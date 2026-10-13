@@ -34,13 +34,6 @@ export default function Footer() {
               {link.label}
             </a>
           ))}
-          <a
-            href={`mailto:${profile.email}`}
-            data-cursor="hover"
-            className="font-display text-[0.6875rem] uppercase tracking-[0.22em] text-chrome-500 transition-colors duration-500 hover:text-white"
-          >
-            Email
-          </a>
           <button
             type="button"
             onClick={() => scrollToSection("#top")}
